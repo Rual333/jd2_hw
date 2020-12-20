@@ -1,0 +1,44 @@
+Задание 8
+Установите web приложение на Tomcat сервер. Настройте контекст приложения
+таким образом, чтобы war файл автоматически распаковывался при запуске сервером
+приложений. Проверьте работоспособность вашего приложения.
+
+В файле server.xml поставил unpackWARs="true", чтобы war файл автоматически распаковывался 
+при запуске сервером.
+
+Создал проект через IntelliJ IDEA.
+Создал servlet Hello c аннотацией @WebServlet(name="HelloTask8", urlPatterns = "/task8"). 
+
+В pom.xml добавил зависимость servlet-api.
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+Добавил плагин tomcat7-maven-plugin с конфигурацией.
+
+	<plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+          <executions>
+            <execution>
+              <id>deployToTomcat9</id>
+              <phase>install</phase>
+              <goals>
+                <goal>undeploy</goal>
+                <goal>deploy</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <username>tomcat</username>
+            <password>tomcat</password>
+          </configuration>
+        </plugin>
+
+Запустил tomcat startup.bat. Командой mvn install задеплоил проект на томкат. Сборка происходит без ошибок. 
+Проверил работу сервлета в manager app. 
