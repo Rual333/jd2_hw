@@ -9,7 +9,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class Test1 {
+public class TestCalculator {
     Calculator calc;
 
 
@@ -26,7 +26,7 @@ public class Test1 {
     private final int val2;
     private final int result;
 
-    public Test1(int val1, int val2, int result) {
+    public TestCalculator(int val1, int val2, int result) {
 
         this.val1 = val1;
         this.val2 = val2;
