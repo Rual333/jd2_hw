@@ -58,7 +58,7 @@
 				<version>1.1</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <path>/task8</path>
+                    <path>/</path>
                     <username>tomcat</username>
                     <password>tomcat</password>
                 </configuration>
