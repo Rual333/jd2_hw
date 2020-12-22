@@ -24,3 +24,4 @@ nothing added to commit but untracked files present (use "git add" to track)
 $ git checkout -b newBranch
 Switched to a new branch 'newBranch'
 
+Добавил файл Temp.txt
