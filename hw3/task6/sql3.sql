@@ -1,0 +1,1 @@
+SELECT max(max) FROM (SELECT paydate,sum(value) sum_val, max(value) max FROM expenses GROUP BY paydate) sub_tab;
