@@ -3,14 +3,14 @@ create database if not exists ListExpenses;
 use listexpenses;
 
 create table if not exists expenses (
-num int,
+num int primary key,
 paydate date,
 receiver int,
 value dec
 );
 
 create table if not exists receivers (
-num int,
+num int primary key,
 name varchar(255) character set 'utf8'
 );
 
