@@ -3,3 +3,16 @@
 платежей, из модуля 2. Информацию о URL базы, имени пользователя и пароле хранить
 в начальных данных сервлета.
 
+Приложение успешно отображает информацию.
+
+Expenses table:
+num= 1 date=2011-05-10 receiver=1 value=2000.0
+num= 2 date=2011-05-10 receiver=2 value=94200.0
+num= 3 date=2011-05-11 receiver=3 value=10000.0
+num= 4 date=2011-05-11 receiver=2 value=12950.0
+
+Receiver table:
+num= 1 receiver=Интернет-провайдер "Соло"
+num= 2 receiver=Гипермаркет "Корона"
+num= 3 receiver=МТС
+
