@@ -6,7 +6,7 @@
          version="4.0">
     <servlet>
         <servlet-name>task8</servlet-name>
-        <servlet-class>servletTask8</servlet-class>
+        <servlet-class>ServletTask8</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>task8</servlet-name>
