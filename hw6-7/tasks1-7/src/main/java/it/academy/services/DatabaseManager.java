@@ -6,24 +6,24 @@ import org.hibernate.Session;
 import java.io.Serializable;
 
 
-public class PersonManager {
+public class DatabaseManager {
 
     private final HibernateUtil sessionFactoryFromHibernateUtil;
 
-    public PersonManager() {
+    public DatabaseManager() {
         this.sessionFactoryFromHibernateUtil = new HibernateUtil();
     }
 
-    public PersonManager(String config) {
+    public DatabaseManager(String config) {
         this.sessionFactoryFromHibernateUtil = new HibernateUtil(config);
     }
 
-    public Serializable savePerson(Person person) {
+    public Serializable save(Object object) {
 
         Session session = sessionFactoryFromHibernateUtil.getSession();
 
         session.beginTransaction();
-        Serializable id = session.save(person);
+        Serializable id = session.save(object);
         session.getTransaction().commit();
 
         session.close();
@@ -31,18 +31,18 @@ public class PersonManager {
         return id;
     }
 
-    public Person loadPerson(Serializable id) {
+    public Object load(Serializable id, Class clazz) {
 
         Session session = sessionFactoryFromHibernateUtil.getSession();
 
-        Person loadedPerson = session.get(Person.class, id);
+        Object loaded = session.get(clazz, id);
         session.close();
 
-        return loadedPerson;
+        return loaded;
 
     }
 
-    public void removePerson(Serializable id) {
+    public void remove(Serializable id) {
 
         Session session = sessionFactoryFromHibernateUtil.getSession();
 
@@ -53,23 +53,23 @@ public class PersonManager {
 
         session.close();
     }
-     public void refreshPerson(Person person) {
+     public void refresh(Object object) {
 
         Session session = sessionFactoryFromHibernateUtil.getSession();
 
         session.beginTransaction();
-        session.refresh(person);
+        session.refresh(object);
         session.getTransaction().commit();
 
         session.close();
      }
 
-    public void saveOrUpdate(Person person) {
+    public void saveOrUpdate(Object object) {
 
         Session session = sessionFactoryFromHibernateUtil.getSession();
 
         session.beginTransaction();
-        session.saveOrUpdate(person);
+        session.saveOrUpdate(object);
         session.getTransaction().commit();
 
         session.close();

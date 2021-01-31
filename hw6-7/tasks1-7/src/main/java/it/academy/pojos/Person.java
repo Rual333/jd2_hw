@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +17,8 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column
     private Long id;
     @Column
     private Integer age;
@@ -24,4 +26,6 @@ public class Person implements Serializable {
     private String name;
     @Column
     private String surname;
+    @Embedded
+    private Address address;
 }

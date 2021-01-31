@@ -1,6 +1,7 @@
 package it.academy.services;
 
 
+import it.academy.pojos.Address;
 import it.academy.pojos.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,7 @@ import java.io.Serializable;
 import static org.junit.Assert.*;
 
 @FixMethodOrder
-public class PersonManagerTest {
+public class DatabaseManagerTest {
 
     private SessionFactory factory;
     private final String configureHibernate = "hibernate.cfg.test.xml";
@@ -36,11 +37,12 @@ public class PersonManagerTest {
     public void savePerson() {
 
         //Given
-        PersonManager personManager = new PersonManager(configureHibernate);
+        DatabaseManager personManager = new DatabaseManager(configureHibernate);
         Session session = factory.openSession();
 
         //When
-        Serializable id = personManager.savePerson(new Person(null, 10, "Test", "Save"));
+        Serializable id = personManager.save(new Person(null, 10, "Test", "Save",
+                new Address("Djumeira", "Dubai", "24857")));
 
         //Then
         assertNotNull(session.get(Person.class, id));
@@ -55,14 +57,15 @@ public class PersonManagerTest {
     public void loadPerson() {
 
         //Given
-        PersonManager personManager = new PersonManager(configureHibernate);
+        DatabaseManager personManager = new DatabaseManager(configureHibernate);
         Session session = factory.openSession();
         session.beginTransaction();
-        Serializable id = session.save(new Person(null, 20, "Test", "Load"));
+        Serializable id = session.save(new Person(null, 20, "Test", "Load",
+                new Address("Djumeira", "Dubai", "24857")));
         session.getTransaction().commit();
 
         //When
-        Person person = personManager.loadPerson(id);
+        Person person = (Person) personManager.load(id, Person.class);
 
         //Then
         assertNotNull(person);
@@ -77,15 +80,16 @@ public class PersonManagerTest {
     @Test
     public void removePerson() {
         //Given
-        PersonManager personManager = new PersonManager(configureHibernate);
+        DatabaseManager personManager = new DatabaseManager(configureHibernate);
         Session session = factory.openSession();
         session.beginTransaction();
-        Serializable id = session.save(new Person(null, 30, "Test", "Remove"));
+        Serializable id = session.save(new Person(null, 30, "Test", "Remove",
+                new Address("Djumeira", "Dubai", "24857")));
         session.getTransaction().commit();
         session.clear();
 
         //When
-        personManager.removePerson(id);
+        personManager.remove(id);
 
         //Then
         Person person = session.get(Person.class, id);
@@ -96,8 +100,9 @@ public class PersonManagerTest {
     @Test
     public void refreshPerson() {
         //Given
-        Person person = new Person(null, 40, "Test", "Refresh");
-        PersonManager personManager = new PersonManager(configureHibernate);
+        Person person = new Person(null, 40, "Test", "Refresh",
+                new Address("Djumeira", "Dubai", "24857"));
+        DatabaseManager personManager = new DatabaseManager(configureHibernate);
         Session session = factory.openSession();
         session.beginTransaction();
         session.save(person);
@@ -106,7 +111,7 @@ public class PersonManagerTest {
 
         //When
          person.setAge(45);
-         personManager.refreshPerson(person);
+         personManager.refresh(person);
 
         //Then
         Integer age = person.getAge();
@@ -117,8 +122,9 @@ public class PersonManagerTest {
     @Test
     public void saveOrUpdatePerson() {
         //Given
-        Person person = new Person(null, 50, "Test", "saveOrUpdate");
-        PersonManager personManager = new PersonManager(configureHibernate);
+        Person person = new Person(null, 50, "Test", "saveOrUpdate",
+                new Address("Djumeira", "Dubai", "24857"));
+        DatabaseManager personManager = new DatabaseManager(configureHibernate);
         Session session = factory.openSession();
         session.beginTransaction();
         session.save(person);
@@ -134,7 +140,6 @@ public class PersonManagerTest {
         assertSame(60, age);
 
     }
-
 
     @After
     public void tearDown() {
