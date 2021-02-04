@@ -47,6 +47,9 @@ public class ServletTask13 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse
             response)
             throws ServletException, IOException {
-        doGet(request, response);
+        PrintWriter out = response.getWriter();
+        out.println("<html><head><title>Visit counter page</title></head>");
+        out.println("<body><h1> Post method is not implemented </h1>");
+        out.println("</body></html>");
     }
 }

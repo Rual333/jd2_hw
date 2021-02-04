@@ -44,15 +44,6 @@ public class ServletTasksHw5 extends HttpServlet {
 
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse
-            response)
-            throws ServletException, IOException {
-            doGet(request, response);
-
-
-    }
-
     private List<Expense> getExpensesTable() throws SQLException {
 
             List<String> initParameters = getInitParam();
