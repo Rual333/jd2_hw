@@ -6,7 +6,7 @@
          version="4.0">
     <servlet>
         <servlet-name>hw5</servlet-name>
-        <servlet-class>servlet.ServletTasksHw5</servlet-class>
+        <servlet-class>it.academy.servlet.ServletTasksHw5</servlet-class>
         <init-param>
             <param-name>dbURL</param-name>
             <param-value>jdbc:mysql://localhost:3306/listexpenses?characterEncoding=utf-8&amp;useUnicode=yes&amp;serverTimezone=Europe/Moscow</param-value>

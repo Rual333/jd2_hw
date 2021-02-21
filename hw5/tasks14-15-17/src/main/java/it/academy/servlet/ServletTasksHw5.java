@@ -1,6 +1,6 @@
-package servlet;
+package it.academy.servlet;
 
-import data.*;
+import it.academy.data.*;
 
 import java.io.*;
 import java.sql.*;

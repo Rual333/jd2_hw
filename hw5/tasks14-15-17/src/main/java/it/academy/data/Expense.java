@@ -1,4 +1,4 @@
-package data;
+package it.academy.data;
 
 import java.io.Serializable;
 import java.sql.Date;
