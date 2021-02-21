@@ -13,17 +13,26 @@ import java.util.Arrays;
 
 
 @ComponentScan(basePackages = "it.academy",
-        includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = ComponentScanNotIgnoredClass.class))
+        includeFilters = @ComponentScan.Filter(
+                type = FilterType.ASSIGNABLE_TYPE,
+                classes = ComponentScanNotIgnoredClass.class))
 public class Main {
 
     public static void main(String[] args) {
+// Выведет имена всех бинов, в том числе ComponentScanNotIgnoredClass,
+// хотя он не отмечен аннотациями и не имеет factory method, т.к. он добавлен фильтром в ComponentScan
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(Main.class);
         Arrays.stream(context.getBeanDefinitionNames())
                 .forEach(System.out::println);
 
+        //  инициализируем класс отдела
         final Department department = context.getBean(Department.class);
+
+        //  инициализируем класс управляющий отделом
         final DepartmentManager departmentManager = context.getBean(DepartmentManager.class);
+
+        // определяем двух работников
         final Employee employee1 = context.getBean(Employee.class);
         employee1.setName("Tim");
         final Employee employee2 = context.getBean(Employee.class);
@@ -34,12 +43,11 @@ public class Main {
         System.out.println(employee1);
         System.out.println(employee2);
 
+        // нанимаем работников
         System.out.println("\nHiring employee in IT Department");
         departmentManager.getDepartmentManagerAbilities().hire(department, employee1);
-
-        departmentManager.getDepartmentManagerAbilities().hire(department, employee2);
         System.out.println("salary is " + employee1.getSalary() + " now");
-
+        departmentManager.getDepartmentManagerAbilities().hire(department, employee2);
         System.out.println(department.getEmployees());
     }
 }
